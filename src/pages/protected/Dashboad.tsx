@@ -7,7 +7,7 @@ import IndustryInsights from "../../components/IndustryInsights";
 const Dashboad = () => {
 
   const [apiInfo, setApiInfo] = useState<{ api: string; method: "get" | "post" | ""; info?: {} } | null>(null);
-  const { error, loading, response } = useFetch(apiInfo ?? { api: "", method: "" })
+  const { loading, response } = useFetch(apiInfo ?? { api: "", method: "" })
 
   useEffect(() => {
     setApiInfo({ api: '/v1/user/getIndustryInsights', method: "post", info: { industry: 'Technology' } })

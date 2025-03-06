@@ -22,7 +22,7 @@ const Quiz = () => {
 
 
   const [server, setServer] = useState<{ api: string; method: "" | "get" | "post" }>({ api: '', method: "" })
-  const { loading, error, response: quizData } = useFetch({ api: server.api, method: server.method });
+  const { loading, response: quizData } = useFetch({ api: server.api, method: server.method });
   const quizeData = storedQuizeData.length > 0 ? storedQuizeData : quizData?.result?.questions || []
 
 

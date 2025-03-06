@@ -10,7 +10,7 @@ const InterView = () => {
 
   
   const [server,setServer] =useState<{api:string,method:""|"get"|"post"}>({api:'',method:''});
-  const { loading, response } = useFetch({ api: server.api, method: server.method });
+  const { response } = useFetch({ api: server.api, method: server.method });
   const [data,setData] = useState<[]|null>([]);
 
   useEffect(()=>{

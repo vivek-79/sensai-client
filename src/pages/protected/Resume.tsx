@@ -6,7 +6,7 @@ import ResumeBuilder from "../../components/ResumeBuilder";
 const Resume = () => {
 
     const [server, setServer] = useState<{ api: string, method: "" | "get" | "post" }>({ api: '', method: '' });
-    const {loading,response,error} = useFetch({api:server.api,method:server.method});
+    const {response} = useFetch({api:server.api,method:server.method});
     const [data, setData] = useState<{id:number,content:string} | null>();
 
     useEffect(()=>{

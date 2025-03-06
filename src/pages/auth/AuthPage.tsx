@@ -1,7 +1,7 @@
 import { useState } from "react"
 import AuthAmination from "../../components/AuthAmination"
 import SignUpForm from "../../forms/SignUpForm"
-import {AnimatePresence, motion} from 'motion/react'
+import { motion} from 'motion/react'
 import LoginForm from "../../forms/LoginForm"
 
 const AuthPage = () => {
