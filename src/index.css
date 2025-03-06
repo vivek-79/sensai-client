@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+*{
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000000;
+}
+
+
+@layer utility{
+    
+    .btn{
+        @apply flex gap-2 items-center justify-center py-1.5 px-3 rounded-md cursor-pointer transition-colors duration-200;
+    }
+
+    .hover-li{
+        @apply py-1 px-10 hover:bg-white/40 rounded-full transition-colors duration-500 cursor-pointer md:px-4
+    }
+
+    .inpt{
+        @apply w-full h-9 border-[0.5px] border-white/50 bg-gray-50/20 outline-none text-white/60 px-2 rounded-md
+    }
+
+    .heading{
+        @apply text-4xl md:text-5xl font-bold bg-gradient-to-b from-white from-0% to-white/10 to-100% text-transparent bg-clip-text py-2
+    }
+
+    .insightCard{
+        @apply p-2 flex flex-col border-[1px] border-white/20 rounded-md w-full
+    }
+    .fade{
+        @apply text-white/70
+    }
+    .box{
+        @apply p-2 w-full border-[1px] border-white/20 rounded-md
+    }
+    .quiz-div{
+        @apply w-full border-[1px] border-white/40 rounded-md py-2 px-4 text-white mt-8 mx-auto
+    }
+    .sub-heading{
+        @apply text-xl md:text-2xl font-semibold text-white/70
+    }
+    .border{
+        @apply border-[1px] border-white/40 p-2 rounded-md
+    }
+}
