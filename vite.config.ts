@@ -8,7 +8,7 @@ export default defineConfig({
 
   server:{
     proxy:{
-      '/v1':'http://localhost:8080/api'
+      '/v1':'https://499029db-4ab6-460b-9ad7-8f86b6f97638.e1-us-east-azure.choreoapps.dev/api'
     }
   }
 })

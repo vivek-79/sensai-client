@@ -18,14 +18,13 @@ export const useFetch =({ api, info, method }: Fetch) => {
     const [loading,setLoading] = useState<boolean>()
     const [response,setResponse] = useState<any>(null);
 
-
     useEffect(()=>{
 
 
         const fetchData = async()=>{
             if (!api || !method) return;
         try {
-            console.log(info)
+            console.log(api)
             setLoading(true)
             let res;
 
@@ -41,6 +40,7 @@ export const useFetch =({ api, info, method }: Fetch) => {
             //@ts-ignore
             setResponse(res?.data || [])
         } catch (error) {
+            console.log(error)
             setError(errorMessage(error))
         } finally {
             setLoading(false)
