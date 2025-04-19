@@ -18,6 +18,8 @@ export const useFetch =({ api, info, method }: Fetch) => {
     const [loading,setLoading] = useState<boolean>()
     const [response,setResponse] = useState<any>(null);
 
+    console.log(api,info,method)
+
     useEffect(()=>{
 
 

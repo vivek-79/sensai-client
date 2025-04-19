@@ -3,6 +3,10 @@
 import { useRef } from "react";
 import Button from "../components/atoms/Button"
 import { useScroll, useTransform, motion } from 'motion/react'
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { User } from "../helpers/types";
 
 
 
@@ -10,7 +14,9 @@ import { useScroll, useTransform, motion } from 'motion/react'
 const HeroSection = () => {
 
 
-    const sectionRef = useRef(null)
+    const sectionRef = useRef(null);
+    const navigate = useNavigate();
+
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["end end", "center end"]
@@ -21,6 +27,24 @@ const HeroSection = () => {
         [0, -40],
     )
 
+    const user = useSelector((state:RootState)=>state.auth.data);
+
+    //navigating get started
+
+    const getStarted =(user:User | null)=>{
+
+        if(!user){
+            navigate('/auth')
+        }
+        else if(!user?.industry){
+            navigate('/onboarding')
+        }
+        else{
+            navigate('interview')
+        }
+    }
+
+    console.log(user);
     return (
         <section className="relative" ref={sectionRef}>
             <div className="w-full">
@@ -36,7 +60,7 @@ const HeroSection = () => {
                     </p>
 
                     <div className="flex items-center justify-center gap-8 mt-8">
-                        <Button title="Get Started" containerClass="bg-white hover:bg-white/70" />
+                        <Button onClick={() => {getStarted(user) }} title="Get Started" containerClass="bg-white hover:bg-white/70" />
                         <Button title="Watch Demo" containerClass="text-white border-[1px] hover:bg-white/20" />
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Link,  useNavigate } from "react-router-dom"
+import { Link,  useLocation,  useNavigate } from "react-router-dom"
 import Button from "./atoms/Button";
 import { SiZedindustries } from "react-icons/si";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import { FaGraduationCap } from "react-icons/fa6";
 import { HiOutlineLogin } from "react-icons/hi";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "../store/authSlice";
+import { signin,signout } from "../store/authSlice";
 import { RootState } from "../store/store";
 import { User } from "../helpers/types";
 
@@ -26,11 +26,13 @@ const Header = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const {pathname} = useLocation();
+
+ 
     const userData:User |null = useSelector((state:RootState)=>state.auth.data) ;
 
     const [menuOpen, setmenuOpen] = useState<boolean>(false)
     const [profileOpen, setProfileOpen] = useState<boolean>(false)
-    const signedIn = true;
 
     const {scrollY} = useScroll();
     const [scrollDirn,setScrollDirn] = useState('up');
@@ -58,28 +60,47 @@ const Header = () => {
         show: { opacity: 1, y: 0 }
     }
 
+    //checking if user exist
     const isuser = async()=>{
         
         try {
 
             if(!userData){
                 const { data } = await axios.get('/v1/user/get');
-                dispatch(signin(data.user));
-                if (!data.success) {
+                
+                if (!data.success && pathname !== '/') {
                     navigate('/auth')
                 }
+                dispatch(signin(data.user));
             }
             else{
                 console.log('already verified',userData)
             }
         } catch (error) {
-            navigate('/auth')
+
+            if (pathname !== '/') navigate('/auth')
+            
         }
     }
 
     useEffect(()=>{
         isuser();
     }, [navigate]);
+
+
+    //logout
+    const logout = async()=>{
+        try {
+            const { data } = await axios.post('/v1/auth/logout');
+
+            if (data.success) {
+                navigate('/auth')
+            }
+            dispatch(signout());
+        } catch (error) {
+            navigate('/')
+        }
+    }
 
     return (
         <header className="z-50 w-full sticky top-0 h-16 md:h-18 px-2">
@@ -98,7 +119,7 @@ const Header = () => {
                         bounce: 0.5
                     }}
                     className="flex gap-2 relative items-center">
-                    {signedIn && (
+                    {userData && (
                         <>
                         <Link to='/dashboard'>
                             <Button
@@ -130,10 +151,10 @@ const Header = () => {
 
                     
 
-                    {signedIn ? (<motion.button layout onClick={() => setProfileOpen(!profileOpen)} className="w-8 h-8 rounded-full">
+                    {userData ? (<motion.button layout onClick={() => setProfileOpen(!profileOpen)} className="w-8 h-8 rounded-full">
                         <motion.img layout src="/avatar-1.png" alt="" />
                     </motion.button>) : (
-                        <Button title='Login' titleClass="text-white/70 text-[12px] md:text-[17px]" rightIcon={<HiOutlineLogin className="text-[15px] text-white/70 hidden md:block" />} containerClass="bg-white/10 hover:bg-white/30" />
+                        <Button title='Login' onClick={()=>navigate('/auth')} titleClass="text-white/70 text-[12px] md:text-[17px]" rightIcon={<HiOutlineLogin className="text-[15px] text-white/70 hidden md:block" />} containerClass="bg-white/10 hover:bg-white/30" />
                     )}
                 </motion.div>
             </motion.nav>
@@ -145,7 +166,7 @@ const Header = () => {
                         <motion.ul variants={list} initial="hidden" animate="show" exit="hidden" className="bg-white/30 text-white/70 rounded-lg py-2 shadow-amber-100/20 shadow-md backdrop-blur-md">
                             <motion.li variants={item} className="hover-li">Profile</motion.li>
                             <motion.li variants={item} className="hover-li">setting</motion.li>
-                            <motion.li variants={item} className="hover-li">Logout</motion.li>
+                            <motion.li variants={item} className="hover-li"><button onClick={logout}>Logout</button></motion.li>
                         </motion.ul>
 
                     </div>
