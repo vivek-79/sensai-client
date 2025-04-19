@@ -38,7 +38,7 @@ const LoginForm = ({ switchForm }: { switchForm: () => void }) => {
         setError('')
 
        try {
-        const userData = await axios.post(`${server}/v1/auth/signin`,data);
+        const userData = await axios.post(`${server}/v1/auth/signin`,data,{withCredentials:true});
 
            if (userData.data.success){
             navigate('/')

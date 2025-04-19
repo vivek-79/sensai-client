@@ -35,7 +35,7 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
     setError('')
 
     try {
-      const userData = await axios.post(`${server}/v1/auth/signup`, data);
+      const userData = await axios.post(`${server}/v1/auth/signup`, data, { withCredentials: true });
 
       if (userData.data.success) {
         navigate('/onboarding')
