@@ -64,7 +64,7 @@ const Header = () => {
     //checking if user exist
     const isuser = async()=>{
 
-        
+        console.log(server)
         
         try {
 
