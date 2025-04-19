@@ -69,7 +69,7 @@ const Header = () => {
         try {
 
             if(!userData){
-                const { data } = await axios.get(`${server}/v1/user/get`);
+                const { data } = await axios.get(`${server}/v1/user/get`,{withCredentials:true});
                 
                 if (!data.success && pathname !== '/') {
                     navigate('/auth')
@@ -94,7 +94,7 @@ const Header = () => {
     //logout
     const logout = async()=>{
         try {
-            const { data } = await axios.post(`${server}/v1/auth/logout`);
+            const { data } = await axios.post(`${server}/v1/auth/logout`, { withCredentials: true });
 
             if (data.success) {
                 navigate('/auth')
