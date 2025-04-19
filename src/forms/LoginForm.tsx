@@ -25,7 +25,9 @@ type SignInSchemaType = z.infer<typeof signInSchema>;
 const LoginForm = ({ switchForm }: { switchForm: () => void }) => {
 
     const navigate = useNavigate();
-    const [error,setError] = useState<string>()
+    const [error,setError] = useState<string>();
+    const server = import.meta.env.VITE_API_URL;
+
 
     const { handleSubmit, register, formState: { errors } } = useForm<SignInSchemaType>({
         resolver: zodResolver(signInSchema)
@@ -36,7 +38,7 @@ const LoginForm = ({ switchForm }: { switchForm: () => void }) => {
         setError('')
 
        try {
-        const userData = await axios.post('/v1/auth/signin',data);
+        const userData = await axios.post(`${server}/v1/auth/signin`,data);
 
            if (userData.data.success){
             navigate('/')

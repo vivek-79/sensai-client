@@ -23,7 +23,9 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
 
 
   const navigate = useNavigate()
-  const [error, setError] = useState<string>()
+  const [error, setError] = useState<string>();
+  const server = import.meta.env.VITE_API_URL;
+
   const { handleSubmit, register, formState: { errors } } = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema)
   });
@@ -33,7 +35,7 @@ const SignUpForm = ({ switchForm }: { switchForm: () => void }) => {
     setError('')
 
     try {
-      const userData = await axios.post('/v1/auth/signup', data);
+      const userData = await axios.post(`${server}/v1/auth/signup`, data);
 
       if (userData.data.success) {
         navigate('/onboarding')
