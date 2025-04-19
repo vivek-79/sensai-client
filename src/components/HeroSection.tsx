@@ -44,7 +44,6 @@ const HeroSection = () => {
         }
     }
 
-    console.log(user);
     return (
         <section className="relative" ref={sectionRef}>
             <div className="w-full">

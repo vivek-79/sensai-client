@@ -11,14 +11,16 @@ interface Fetch {
 }
 
 
+
 export const useFetch =({ api, info, method }: Fetch) => {
 
+    const server = import.meta.env.VITE_API_URL
     
     const [error,setError] = useState<string>('')
     const [loading,setLoading] = useState<boolean>()
     const [response,setResponse] = useState<any>(null);
 
-    console.log(api,info,method)
+
 
     useEffect(()=>{
 
@@ -26,16 +28,17 @@ export const useFetch =({ api, info, method }: Fetch) => {
         const fetchData = async()=>{
             if (!api || !method) return;
         try {
-            console.log(api)
+
+
             setLoading(true)
             let res;
 
             if (method === 'get') {
 
-                res = await axios.get(api);
+                res = await axios.get(`${server}${api}`);
             }
             if (method === 'post') {
-                res = await axios.post(api, info);
+                res = await axios.post(`${server}${api}`, info);
             }
 
             console.log(res)
