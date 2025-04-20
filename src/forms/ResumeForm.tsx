@@ -23,8 +23,8 @@ const ResumeForm = ({initialData}:{initialData:{id:number | undefined,content:st
     const [experienced, setExperienced] = useState<boolean>(false);
     const [showSummery, setShowSummery] = useState<boolean>(false);
     const [previewContent, setPreviewContent] = useState<any>();
-    const [isGenerating,setIsGenerating] = useState<boolean>()
-    const [showWarning, setShowWarning] = useState<boolean>()
+    const [isGenerating,setIsGenerating] = useState<boolean>();
+    const [showWarning, setShowWarning] = useState<boolean>();
     const [server, setServer] = useState<{ api: string; method: "" | "get" | "post",info?:any }>({ api: '', method: "" ,info:""})
 
     const {control,register,handleSubmit,watch,formState:{errors}} = useForm({
@@ -165,7 +165,7 @@ const ResumeForm = ({initialData}:{initialData:{id:number | undefined,content:st
 
     const newResume= ()=>{
         setServer({ api: '/v1/resume/delete', method: 'get'})
-        window.location.reload();
+        
         setShowWarning(false);
     }
    
