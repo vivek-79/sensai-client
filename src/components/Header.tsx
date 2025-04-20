@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import Button from "./atoms/Button";
 import { SiZedindustries } from "react-icons/si";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { GrObjectGroup } from "react-icons/gr";
 import { IoIosArrowDown } from "react-icons/io";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react'
