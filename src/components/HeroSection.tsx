@@ -52,15 +52,14 @@ const HeroSection = () => {
                     <h2>Your AI Carrer Coach for</h2>
                     <h2>Professional Success</h2>
                 </div>
-
                 <div className="flex flex-col">
                     <p className="text-white mx-auto max-w-md w-[80%] mt-6 text-center text-sm">Advance your career with personalized guidance,Interview
                         prep, and AI-powered tools for job sucess.
                     </p>
 
                     <div className="flex items-center justify-center gap-8 mt-8">
-                        <Button onClick={() => {getStarted(user) }} title="Get Started" containerClass="bg-white hover:bg-white/70" />
-                        <Button title="Watch Demo" containerClass="text-white border-[1px] hover:bg-white/20" />
+                        <Button onClick={() => { getStarted(user) }} title="Get Started" containerClass="bg-white hover:bg-white/70 relative hover:scale-110 transition-all duration-500 scale-3d overflow-hidden flashBtn" />
+                        <Button title="Watch Demo" containerClass="text-white border-[1px] hover:bg-white/20 relative overflow-hidden flashBtn hover:scale-110 transition-all duration-500 scale-3d" />
                     </div>
                 </div>
 

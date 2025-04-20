@@ -43,7 +43,7 @@ const Features = () => {
 
         <div className="flex items-center justify-center text-white flex-wrap gap-4 py-14 px-4 md:px-6">
             {features.map((item,indx)=>(
-                <div className=" hover:bg-white/10 hover:scale-3d hover:scale-105 transition-all duration-500 md:w-1/5 md:min-w-64 w-full flex flex-col items-center justify-start gap-3 text-center border-[1px] border-white/50 rounded-md p-4 md:min-h-48 shadow-md shadow-white/30" key={indx}>
+                <div className=" relative rotate-border bg-black md:w-1/5 md:min-w-64 w-full flex flex-col items-center justify-start gap-3 text-center border-[1px] border-white/50 rounded-md p-4 md:min-h-48 shadow-md shadow-white/30 " key={indx}>
                     <p>{item.icon}</p>
                     <p className="text-xl font-medium">{item.title}</p>
                     <p className="text-base leading-4 font-light text-white/50">{item.description}</p>

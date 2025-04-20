@@ -15,7 +15,7 @@ interface props{
 
 const Button: FC<props> = ({ containerClass, title, leftIcon, rightIcon, titleClass ,onClick,transition,type}) => {
   return (
-    <motion.button type={type} layout transition={transition} onClick={onClick} className={`${containerClass} btn`}>
+    <motion.button type={type} layout transition={transition} onClick={onClick} className={`${containerClass} btn relative`}>
         {leftIcon}
           <span className={titleClass}>{title}</span>
         {rightIcon}

@@ -35,10 +35,10 @@ export const useFetch =({ api, info, method }: Fetch) => {
 
             if (method === 'get') {
 
-                res = await axios.get(`${server}${api}`);
+                res = await axios.get(`${server}${api}`, { withCredentials: true });
             }
             if (method === 'post') {
-                res = await axios.post(`${server}${api}`, info);
+                res = await axios.post(`${server}${api}`, info, { withCredentials: true });
             }
 
             console.log(res)

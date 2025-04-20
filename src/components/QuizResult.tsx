@@ -35,7 +35,6 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew, answers, quizeda
         return null;
     }
 
-    console.log(score)
     const percentage = (score/10)*100;
     
     return (

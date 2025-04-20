@@ -45,7 +45,7 @@ const Testimonials = () => {
       <div className=" w-full py-12 px-4 flex gap-4 items-center justify-center flex-wrap">
         {testimonial.map((item,indx)=>(
 
-            <div key={indx} className="bg-black flex flex-col  justify-center gap-4 p-4 w-full md:w-1/5 md:min-h-50 shadow-md shadow-white/20 rounded-md">
+            <div key={indx} className="bg-black flex flex-col  justify-center gap-4 p-4 w-full md:w-1/5 md:min-h-50 shadow-md shadow-white/20 rounded-md relative rotate-border">
 
                 <div className="flex gap-4">
                     <img src={item.image} alt="Users Image" className="w-10 h-10 rounded-full" />

@@ -56,7 +56,7 @@ const IndustryInsights = ({ data }: { data: Data }) => {
 
 
     if (!data) {
-        return <p>Loading...</p>
+        return null
     }
     if (!data.success) {
         return <p>{data.message}</p>

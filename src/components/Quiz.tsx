@@ -6,6 +6,7 @@ import { addAnswers, removeQuizeData, saveQuizedata } from "../store/quizSlice";
 import { RootState } from "../store/store";
 import axios from "axios";
 import QuizResult from "./QuizResult";
+import { Mosaic } from "react-loading-indicators";
 
 
 const Quiz = () => {
@@ -18,7 +19,9 @@ const Quiz = () => {
   const [resultData,setResultData] = useState('');
   
 
-  const scoreRef= useRef(0)
+  const scoreRef= useRef(0);
+  const serverApi = import.meta.env.VITE_API_URL
+
 
 
   const [server, setServer] = useState<{ api: string; method: "" | "get" | "post" }>({ api: '', method: "" })
@@ -48,11 +51,9 @@ const Quiz = () => {
 
   if (loading) {
 
-    return (
-      <div className="w-full min-h-80 flex flex-col items-center justify-center">
-        <p className="fade">Loading ...</p>
-      </div>
-    )
+    return <div className="fixed inset-0 flex items-center justify-center">
+      <Mosaic color="#ffffff" size="medium" text="" textColor="" />
+    </div>
   }
 
   if (!quizeData || quizeData.length === 0) {
@@ -118,7 +119,7 @@ const Quiz = () => {
      
   try {
     
-    const { data } = await axios.post('/v1/interview/submit', info)
+    const { data } = await axios.post(`${serverApi}/v1/interview/submit`, info, { withCredentials: true })
     if(data.success){
       setResultData(data.message)
     }

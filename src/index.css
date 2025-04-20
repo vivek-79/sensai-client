@@ -16,7 +16,7 @@ html,body{
 @layer utility{
     
     .btn{
-        @apply flex gap-2 items-center justify-center py-1.5 px-3 rounded-md cursor-pointer transition-colors duration-200;
+        @apply flex gap-2 items-center justify-center py-1.5 px-3 rounded-md cursor-pointer transition-all duration-200 overflow-hidden;
     }
 
     .hover-li{
@@ -48,5 +48,74 @@ html,body{
     }
     .border{
         @apply border-[1px] border-white/40 p-2 rounded-md
+    }
+}
+
+
+.flashBtn ::after{
+    content: "";
+    position: absolute;
+    z-index: 10;
+    top:0%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right,
+            rgba(255, 0, 0, 0.252) 16%,
+            rgba(255, 0, 43, 0.256) 32%,
+            rgba(0, 0, 255, 0.211) 48%,
+            rgba(255, 0, 0, 0.259) 64%,
+            rgba(252, 0, 42, 0.241) 80%,
+            rgba(0, 0, 255, 0.212) 100%);
+    background-size: 200% 100%;
+    background-repeat: repeat-x;
+    animation: 0.7s moving linear infinite;
+    mix-blend-mode:exclusion;
+}
+
+@keyframes moving {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+    background-position: -100% 0%;
+    }
+}
+
+
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.rotate-border::after ,.rotate-border::before{
+    position: absolute;
+    content: " ";
+    top:50%;
+    left:50%;
+    translate: -50% -50%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 10px;
+    will-change: var(--angle);
+    background-image: conic-gradient(from var(--angle), transparent 10%,red 40%,blue 80%,transparent 100%);
+    animation: spinn  1s linear infinite;
+}
+
+
+.rotate-border::before{
+    filter: blur(6px);
+}
+
+@keyframes spinn{
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle:360deg;
     }
 }
