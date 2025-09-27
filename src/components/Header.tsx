@@ -70,7 +70,7 @@ const Header = () => {
                 const { data } = await axios.get(`${server}/v1/user/get`, { withCredentials: true });
 
                 console.log(data);
-                
+
                 if (!data.success && pathname !== '/') {
                     navigate('/auth')
                 }
@@ -91,20 +91,27 @@ const Header = () => {
     }, [navigate]);
 
     //logout
+    // logout
     const logout = async () => {
         try {
-            const { data } = await axios.post(`${server}/v1/auth/logout`, { withCredentials: true });
+            dispatch(signout()); // update immediately
+            const { data } = await axios.post(
+                `${server}/v1/auth/logout`,
+                {},
+                { withCredentials: true }
+            );
 
             if (data.success) {
-                navigate('/auth')
+                navigate('/auth');
+            } else {
+                navigate('/');
             }
-            dispatch(signout());
         } catch (error) {
-            navigate('/')
+            navigate('/');
         }
-    }
+    };
 
-   
+
     return (
         <header className="z-50 w-full sticky top-0 h-16 md:h-18 px-2">
             <motion.nav
@@ -115,7 +122,7 @@ const Header = () => {
                 </Link>
 
                 <motion.div
-                    
+
                     className="flex gap-2 relative items-center">
                     {userData && (
                         <>
@@ -168,9 +175,9 @@ const Header = () => {
 
                             )}
                         </div>
-                            ): (
-                            <Button title='Login' onClick={() => navigate('/auth')} titleClass="text-white/70 text-[12px] md:text-[17px]" rightIcon={<HiOutlineLogin className="text-[15px] text-white/70 hidden md:block" />} containerClass="bg-white/10 hover:bg-white/30" />
-                            )
+                    ) : (
+                        <Button title='Login' onClick={() => navigate('/auth')} titleClass="text-white/70 text-[12px] md:text-[17px]" rightIcon={<HiOutlineLogin className="text-[15px] text-white/70 hidden md:block" />} containerClass="bg-white/10 hover:bg-white/30" />
+                    )
                     }
                 </motion.div>
             </motion.nav>
