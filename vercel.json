@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-        {
-            "source": "/v1/:path*",
-            "destination": "https://sensai.vivekroy5667.workers.dev/api/v1/:path*"
-        }
-    ]
-}

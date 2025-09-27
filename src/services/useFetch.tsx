@@ -7,52 +7,54 @@ interface Fetch {
     api: string;
 
     info?: Record<string, any>;
-    method: "get" | "post" | "";
+    method: "get" | "post" |"";
 }
 
 
 
-export const useFetch = ({ api, info, method }: Fetch) => {
+export const useFetch =({ api, info, method }: Fetch) => {
 
-    const [error, setError] = useState<string>('')
-    const [loading, setLoading] = useState<boolean>()
-    const [response, setResponse] = useState<any>(null);
-
-
-
-    useEffect(() => {
+    const server = import.meta.env.VITE_API_URL
+    
+    const [error,setError] = useState<string>('')
+    const [loading,setLoading] = useState<boolean>()
+    const [response,setResponse] = useState<any>(null);
 
 
-        const fetchData = async () => {
+
+    useEffect(()=>{
+
+
+        const fetchData = async()=>{
             if (!api || !method) return;
-            try {
+        try {
 
 
-                setLoading(true)
-                let res;
+            setLoading(true)
+            let res;
 
-                if (method === 'get') {
+            if (method === 'get') {
 
-                    res = await axios.get(`${api}`, { withCredentials: true });
-                }
-                if (method === 'post') {
-                    res = await axios.post(`${api}`, info, { withCredentials: true });
-                }
-
-                //@ts-ignore
-                setResponse(res?.data || [])
-            } catch (error) {
-                console.log(error)
-                setError(errorMessage(error))
-            } finally {
-                setLoading(false)
+                res = await axios.get(`${server}${api}`, { withCredentials: true });
             }
-        };
+            if (method === 'post') {
+                res = await axios.post(`${server}${api}`, info, { withCredentials: true });
+            }
 
-        fetchData();
+            //@ts-ignore
+            setResponse(res?.data || [])
+        } catch (error) {
+            console.log(error)
+            setError(errorMessage(error))
+        } finally {
+            setLoading(false)
+        }
+    };
 
-    }, [api, info, method])
+    fetchData();
 
+    },[api,info,method])
 
-    return { response, loading, error }
+   
+    return { response,loading,error}
 }
