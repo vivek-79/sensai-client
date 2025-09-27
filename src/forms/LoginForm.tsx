@@ -57,7 +57,7 @@ const LoginForm = ({ switchForm }: { switchForm: () => void }) => {
             {errors.email && <p className="text-red-500/60 -mt-3">{errors.email.message}</p>}
             <FormChild label="Password" type="password" id="password" register={register} />
             {errors.password && <p className="text-red-500/60 -mt-3">{errors.password.message}</p>}
-            <Button title="Sign Up" containerClass="text-white bg-green-400/40 w-full mt-8" />
+            <Button title="Login" containerClass="text-white bg-green-400/40 w-full mt-8" />
             <p onClick={switchForm} className="cursor-pointer mx-auto text-center w-full mt-2">Don&apos;t have an account? <b>Sign Up</b></p>
         </form>
     )
