@@ -27,7 +27,6 @@ const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { pathname } = useLocation();
-    const server = import.meta.env.VITE_API_URL
 
 
     const userData: User | null = useSelector((state: RootState) => state.auth.data);
@@ -67,9 +66,7 @@ const Header = () => {
         try {
 
             if (!userData) {
-                const { data } = await axios.get(`${server}/v1/user/get`, { withCredentials: true });
-
-                console.log(data);
+                const { data } = await axios.get(`/v1/user/get`, { withCredentials: true });
 
                 if (!data.success && pathname !== '/') {
                     navigate('/auth')
@@ -96,7 +93,7 @@ const Header = () => {
         try {
             dispatch(signout()); // update immediately
             const { data } = await axios.post(
-                `${server}/v1/auth/logout`,
+                `/v1/auth/logout`,
                 {},
                 { withCredentials: true }
             );

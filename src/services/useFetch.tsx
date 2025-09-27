@@ -14,8 +14,6 @@ interface Fetch {
 
 export const useFetch = ({ api, info, method }: Fetch) => {
 
-    const server = import.meta.env.VITE_API_URL
-
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>()
     const [response, setResponse] = useState<any>(null);
@@ -35,13 +33,12 @@ export const useFetch = ({ api, info, method }: Fetch) => {
 
                 if (method === 'get') {
 
-                    res = await axios.get(`${server}${api}`, { withCredentials: true });
+                    res = await axios.get(`${api}`, { withCredentials: true });
                 }
                 if (method === 'post') {
-                    res = await axios.post(`${server}${api}`, info, { withCredentials: true });
+                    res = await axios.post(`${api}`, info, { withCredentials: true });
                 }
 
-                console.log(res)
                 //@ts-ignore
                 setResponse(res?.data || [])
             } catch (error) {
