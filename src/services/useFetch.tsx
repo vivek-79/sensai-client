@@ -7,55 +7,55 @@ interface Fetch {
     api: string;
 
     info?: Record<string, any>;
-    method: "get" | "post" |"";
+    method: "get" | "post" | "";
 }
 
 
 
-export const useFetch =({ api, info, method }: Fetch) => {
+export const useFetch = ({ api, info, method }: Fetch) => {
 
     const server = import.meta.env.VITE_API_URL
-    
-    const [error,setError] = useState<string>('')
-    const [loading,setLoading] = useState<boolean>()
-    const [response,setResponse] = useState<any>(null);
+
+    const [error, setError] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>()
+    const [response, setResponse] = useState<any>(null);
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
 
 
-        const fetchData = async()=>{
+        const fetchData = async () => {
             if (!api || !method) return;
-        try {
+            try {
 
 
-            setLoading(true)
-            let res;
+                setLoading(true)
+                let res;
 
-            if (method === 'get') {
+                if (method === 'get') {
 
-                res = await axios.get(`${server}${api}`, { withCredentials: true });
+                    res = await axios.get(`${server}${api}`, { withCredentials: true });
+                }
+                if (method === 'post') {
+                    res = await axios.post(`${server}${api}`, info, { withCredentials: true });
+                }
+
+                console.log(res)
+                //@ts-ignore
+                setResponse(res?.data || [])
+            } catch (error) {
+                console.log(error)
+                setError(errorMessage(error))
+            } finally {
+                setLoading(false)
             }
-            if (method === 'post') {
-                res = await axios.post(`${server}${api}`, info, { withCredentials: true });
-            }
+        };
 
-            console.log(res)
-            //@ts-ignore
-            setResponse(res?.data || [])
-        } catch (error) {
-            console.log(error)
-            setError(errorMessage(error))
-        } finally {
-            setLoading(false)
-        }
-    };
+        fetchData();
 
-    fetchData();
+    }, [api, info, method])
 
-    },[api,info,method])
 
-   
-    return { response,loading,error}
+    return { response, loading, error }
 }

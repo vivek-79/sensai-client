@@ -69,6 +69,8 @@ const Header = () => {
             if (!userData) {
                 const { data } = await axios.get(`${server}/v1/user/get`, { withCredentials: true });
 
+                console.log(data);
+                
                 if (!data.success && pathname !== '/') {
                     navigate('/auth')
                 }
@@ -87,7 +89,6 @@ const Header = () => {
     useEffect(() => {
         isuser();
     }, [navigate]);
-
 
     //logout
     const logout = async () => {
@@ -134,7 +135,10 @@ const Header = () => {
                                     className="translate-y-[95px] relative bg-white/10 text-white/70 py-2 backdrop-blur-3xl rounded-md flex flex-col gap-2  ">
                                     <p className=" absolute -top-2 -right-1 bg-white/50 px-1.5 rounded-full text-sm cursor-pointer" onClick={() => setmenuOpen(false)}>X</p>
                                     {menuItems.map((items, indx) => (
-                                        <motion.li key={indx} variants={item} className="text-white/80 cursor-pointer px-4 md:px-6 hover:bg-white/50 rounded-full transition-colors duration-500 flex text-sm items-center  gap-1 tracking-tight md:text-[15px] py-1"><Link to={items.href}>{items.icon}{items.text}</Link></motion.li>
+                                        <motion.li key={indx} variants={item} className="hover-li  px-3"><Link to={items.href} className="flex flex-row gap-1 items-center" >
+                                            <span>{items.icon}</span>
+                                            <span>{items.text}</span>
+                                        </Link></motion.li>
                                     ))}
                                 </motion.ul>
                             )}
@@ -146,18 +150,18 @@ const Header = () => {
 
 
                     {userData ? (
-                        <div>
+                        <div className="relative">
                             <motion.button layout onClick={() => setProfileOpen(!profileOpen)} className="w-8 h-8 rounded-full relative">
                                 <motion.img layout src="/avatar-1.png" alt="" />
                             </motion.button>
                             {profileOpen && (
 
-                                <div className="absolute bottom-[-350%] max-md:right-4 md:-translate-x-10">
+                                <div className="absolute top-[60px] max-md:right-4 md:-translate-x-10">
 
-                                    <motion.ul variants={list} initial="hidden" animate="show" exit="hidden" className="bg-white/30 text-white/70 rounded-lg py-2 shadow-amber-100/20 shadow-md backdrop-blur-md">
-                                        <motion.li variants={item} className="hover-li">Profile</motion.li>
-                                        <motion.li variants={item} className="hover-li">setting</motion.li>
-                                        <motion.li variants={item} className="hover-li"><button onClick={logout}>Logout</button></motion.li>
+                                    <motion.ul variants={list} initial="hidden" animate="show" exit="hidden" className=" bg-white/10 text-white/70 rounded-lg py-2 shadow-amber-100/20 shadow-md backdrop-blur-md">
+                                        <motion.li variants={item} className="hover-li px-6">Profile</motion.li>
+                                        <motion.li variants={item} className="hover-li px-6">setting</motion.li>
+                                        <motion.li variants={item} className="hover-li px-6"><button onClick={logout}>Logout</button></motion.li>
                                     </motion.ul>
 
                                 </div>

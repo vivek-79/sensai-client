@@ -20,7 +20,7 @@ html,body{
     }
 
     .hover-li{
-        @apply py-1 px-10 hover:bg-white/40 rounded-full transition-colors duration-500 cursor-pointer md:px-4
+        @apply py-1 hover:bg-white/40 rounded-full transition-colors duration-500 cursor-pointer md:px-4
     }
 
     .inpt{
@@ -61,12 +61,12 @@ html,body{
     height: 100%;
     width: 100%;
     background-image: linear-gradient(to right,
-            rgba(255, 0, 0, 0.252) 16%,
-            rgba(255, 0, 43, 0.256) 32%,
-            rgba(0, 0, 255, 0.211) 48%,
-            rgba(255, 0, 0, 0.259) 64%,
-            rgba(252, 0, 42, 0.241) 80%,
-            rgba(0, 0, 255, 0.212) 100%);
+            rgba(255, 0, 0, 0.13) 16%,
+            rgba(255, 0, 43, 0.142) 32%,
+            rgba(0, 0, 255, 0.134) 48%,
+            rgba(255, 0, 0, 0.183) 64%,
+            rgba(252, 0, 42, 0.175) 80%,
+            rgba(0, 0, 255, 0.121) 100%);
     background-size: 200% 100%;
     background-repeat: repeat-x;
     animation: 0.7s moving linear infinite;
@@ -102,7 +102,7 @@ html,body{
     z-index: -1;
     border-radius: 10px;
     will-change: var(--angle);
-    background-image: conic-gradient(from var(--angle), transparent 10%,red 40%,blue 80%,transparent 100%);
+    background-image: conic-gradient(from var(--angle), transparent 10%,rgba(255, 0, 0, 0.517) 40%,rgba(0, 0, 255, 0.537) 80%,transparent 100%);
     animation: spinn  1s linear infinite;
 }
 

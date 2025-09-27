@@ -1,5 +1,4 @@
 import { useState } from "react"
-import AuthAmination from "../../components/AuthAmination"
 import SignUpForm from "../../forms/SignUpForm"
 import { motion} from 'motion/react'
 import LoginForm from "../../forms/LoginForm"
@@ -26,8 +25,6 @@ const AuthPage = () => {
   return (
     <section className="w-full h-dvh relative overflow-clip">
 
-      {/* Rain */}
-      <AuthAmination />
       <div className="absolute top-0 left-0 bottom-0 right-0">
         <img src="/banner.jpeg" alt="Background Image"  className="w-full h-full object-cover"/>
       </div>
